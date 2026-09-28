@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f6f5f1" />
+    <meta name="description" content="收集想读的文章，留给稍后的自己。" />
+    <title>稍后读 · 个人阅读清单</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#top" aria-label="稍后读首页">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M5 4.75A1.75 1.75 0 0 1 6.75 3H19v16H6.75A1.75 1.75 0 0 0 5 20.75v-16Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M5 18.5c.45-.65 1.05-1 1.8-1H19M9 7h6m-6 3.5h6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+          </span>
+          <span class="brand-name">稍后读<span>READING LIST</span></span>
+        </a>
+        <span class="topbar-note"><span class="status-dot"></span> 一个留给好奇心的角落</span>
+      </header>
+
+      <main id="top">
+        <section class="intro" aria-labelledby="page-title">
+          <div>
+            <p class="eyebrow">YOUR PERSONAL READING SPACE</p>
+            <h1 id="page-title">把值得读的内容，<br class="mobile-break" />留给稍后的自己<span class="title-period">.</span></h1>
+            <p class="intro-copy">好文章不必急着读完。先收好，等合适的时候再慢慢打开。</p>
+          </div>
+          <div class="intro-decoration" aria-hidden="true"><span>READ</span><span>AT YOUR</span><span>OWN PACE</span><i></i></div>
+        </section>
+
+        <section class="stats" aria-label="阅读清单概览">
+          <div class="stat-card stat-total"><span class="stat-icon" aria-hidden="true">↗</span><div><span class="stat-label">全部收藏</span><strong id="total-count">0</strong></div></div>
+          <div class="stat-card"><span class="stat-icon stat-icon-soft" aria-hidden="true">◷</span><div><span class="stat-label">待阅读</span><strong id="unread-count">0</strong></div></div>
+          <div class="stat-card"><span class="stat-icon stat-icon-soft" aria-hidden="true">✓</span><div><span class="stat-label">已读完</span><strong id="read-count">0</strong></div></div>
+        </section>
+
+        <div class="workspace">
+          <aside class="add-panel" aria-labelledby="form-title">
+            <div class="panel-heading">
+              <div class="panel-icon" aria-hidden="true">＋</div>
+              <div><h2 id="form-title">收下一篇好文章</h2><p>先放进清单，灵感不会走丢。</p></div>
+            </div>
+            <form id="article-form">
+              <label for="article-title">文章标题 <span>必填</span></label>
+              <input id="article-title" name="title" type="text" maxlength="160" placeholder="例如：设计的日常练习" required />
+
+              <label for="article-url">文章链接 <span>必填</span></label>
+              <div class="url-input-wrap"><span aria-hidden="true">↗</span><input id="article-url" name="url" type="url" placeholder="https://example.com/article" required /></div>
+
+              <label for="article-note">给自己留句话 <span class="optional-label">选填</span></label>
+              <textarea id="article-note" name="note" rows="3" maxlength="300" placeholder="为什么想读它？记下此刻的想法…"></textarea>
+
+              <button class="submit-button" type="submit"><span>加入阅读清单</span><span aria-hidden="true">→</span></button>
+              <p class="form-footnote"><span aria-hidden="true">⌑</span> 内容只保存在当前浏览器</p>
+            </form>
+          </aside>
+
+          <section class="list-panel" aria-labelledby="list-title">
+            <div class="list-heading">
+              <div><p class="eyebrow">YOUR SAVED STORIES</p><h2 id="list-title">阅读清单 <span id="visible-count">0</span></h2></div>
+              <div class="list-sparkle" aria-hidden="true">✳</div>
+            </div>
+            <div class="list-tools">
+              <label class="search-box" for="search-input"><span aria-hidden="true">⌕</span><input id="search-input" type="search" placeholder="搜索标题或笔记…" autocomplete="off" /><kbd>⌘ K</kbd></label>
+              <div class="filter-tabs" role="group" aria-label="筛选阅读状态">
+                <button class="filter-button is-active" type="button" data-filter="all" aria-pressed="true">全部</button>
+                <button class="filter-button" type="button" data-filter="unread" aria-pressed="false">待阅读</button>
+                <button class="filter-button" type="button" data-filter="read" aria-pressed="false">已读</button>
+              </div>
+            </div>
+            <div id="article-list" class="article-list" aria-live="polite"></div>
+            <div id="empty-state" class="empty-state">
+              <div class="empty-illustration" aria-hidden="true"><span>✳</span><div><i></i><i></i><i></i></div></div>
+              <h3>你的下一篇好文章，就从这里开始</h3>
+              <p>把遇见的好内容收进来，<br />为未来的自己留一点阅读惊喜。</p>
+            </div>
+            <p id="storage-notice" class="storage-notice" role="status" hidden></p>
+          </section>
+        </div>
+      </main>
+      <footer class="footer"><span>MADE FOR YOUR NEXT GOOD READ</span><span>读一点，再读一点。<i>✳</i></span></footer>
+    </div>
+  </body>
+</html>
